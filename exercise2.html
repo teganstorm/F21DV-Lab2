@@ -21,8 +21,8 @@
 		}
 	</style>
 	<script>
-		var width = 800
-    var height = 800
+    var width = document.width
+    var height = document.height
     var elements = []
     var extras = []
 
@@ -31,7 +31,7 @@
     }
 
     
-    for (var i=0; i<5; i++) {
+    for (var i=0; i<7; i++) {
       random_width = getRandomInt(width)
       random_height = getRandomInt(height)
       console.log("Adding Element")
@@ -95,8 +95,8 @@
       element.remove();
       var extra = extras.pop(0);
     }
-    setInterval(removeElement, 4000)
-    setInterval(addElement, 4000)
+    setInterval(removeElement, 1000)
+    setInterval(addElement, 1000)
 
 	</script>
 </body>
