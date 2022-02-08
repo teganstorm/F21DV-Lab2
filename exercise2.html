@@ -21,7 +21,7 @@
 		}
 	</style>
 	<script>
-    var width = 500
+		var width = 500
     var height = 500
     var elements = []
     var extras = []
@@ -92,10 +92,10 @@
     }
 
     function removeElement() {
-      console.log("removeing Element")
-      var element = elements[0];
+      console.log("Removing Element")
+      var element = elements.shift();
       element.remove();
-      var extra = extras[0];
+      var extra = extras.shift();
       extra.remove();
     }
     setInterval(removeElement, 2000)
