@@ -21,8 +21,8 @@
 		}
 	</style>
 	<script>
-    var width = 1500
-    var height = 1000
+    var width = 500
+    var height = 500
     var elements = []
     var extras = []
 
@@ -79,6 +79,7 @@
         .style("left", random_width+"px")
         .style("top", random_height+"px")
         .text("Hover Over Me!")
+      	.style("font-family", "Trebuchet MS")
       elements.push(span)
       var extra = d3.select("body")
         .append("div")
@@ -86,6 +87,7 @@
         .style("left", random_width+"px")
         .style("top", (random_height+20)+"px")
         .text("X: "+ random_width + ", Y: "+ random_height)
+      	.style("font-family", "Trebuchet MS")
       extras.push(extra)
     }
 
@@ -95,8 +97,8 @@
       element.remove();
       var extra = extras.pop(0);
     }
-    setInterval(removeElement, 1000)
-    setInterval(addElement, 1000)
+    setInterval(addElement, 2000)
+    setInterval(removeElement, 2000)
 
 	</script>
 </body>
