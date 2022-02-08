@@ -93,9 +93,10 @@
 
     function removeElement() {
       console.log("removeing Element")
-      var element = elements.pop(0);
+      var element = elements[0];
       element.remove();
-      var extra = extras.pop(0);
+      var extra = extras[0];
+      extra.remove();
     }
     setInterval(removeElement, 2000)
     setInterval(addElement, 2000)
