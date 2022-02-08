@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,16 +6,17 @@
 </head>
 
 <body>
-  <button> <a href="index.html">Back</a> </button>
-  <div>
-  <svg width="600" height="500"></svg>
-  <script>
-    var svg = d3.select("svg");
+	<button> <a href="index.html">Back</a> </button>
+	<div>
+		<svg width="600" height="500"></svg>
+		<script>
+			var svg = d3.select("svg");
     var margin = 200;
     var width = svg.attr("width") - margin; 
     var height = svg.attr("height") - margin;
 
     svg.append("text")
+	    .style("font-family", "Trebuchet MS")
       .attr("transform", "translate(100,0)") 
       .attr("x", 50)
       .attr("y", 50)
@@ -32,8 +33,9 @@
     var g = svg.append("g")
       .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
-	  var csvfile = 'https://raw.githubusercontent.com/teganstorm/F21DV-lab2/master/csvfile.csv';
+	  var csvfile = 'https://raw.githubusercontent.com/teganstorm/F21DV-lab2/master/data1.csv';
     d3.csv( csvfile ).then(function(data) {
+      console.log(data[0])
       x.domain( data.map(function(d) { 
         return d.year; 
       }) );
@@ -44,6 +46,7 @@
       g.append("g")
         .attr("transform", "translate(0," + height + ")") .call(d3.axisBottom(x))
         .append("text")
+		    .style("font-family", "Trebuchet MS")
         .attr("y", height - 250)
         .attr("x", width - 100)
         .attr("text-anchor", "end")
@@ -57,6 +60,7 @@
         })
         .ticks(10))
         .append("text") 
+		    .style("font-family", "Trebuchet MS")
         .attr("transform", "rotate(-90)") 
         .attr("y", 6)
         .attr("dy", "-5.1em") 
@@ -69,11 +73,14 @@
         .enter()
         .append("rect") 
         .attr("class", "bar")
-        // .on(..... ) – call mouse events here... 
+        .attr("fill", "purple")
+		    .on("mouseover", onMouseOver) //Add listener for the mouseover event
+		    .on("mouseout", onMouseOut) //Add listener for the mouseout event
         .attr("x", function(d) { 
           return x(d.year); 
         }) 
         .attr("y", function(d) { 
+          console.log()
           return y(d.value); 
         }) 
         .attr("width", x.bandwidth())
@@ -88,7 +95,35 @@
         });
     });
 
-  </script>
+    //mouseover event handler function 
+    function onMouseOver(d, i) {
+      d3.select(this).attr('class', 'highlight'); d3.select(this)
+      .transition() // adds animation
+      .duration(400)
+      .attr('width', x.bandwidth() + 5)
+      .attr("y", function(d) { return y(d.value) - 10; })
+      .attr("height", function(d) { return height - y(d.value) + 10; });
+      g.append("text") 
+	    .style("font-family", "Trebuchet MS")
+      .attr('class', 'val') .attr('x', function() {
+      return x(d.year); })
+      .attr('y', function() { return y(d.value) - 15;
+      })
+      .text( function(d) { return '$' + i.value; } ); // Value of the text 
+    }
+
+    //mouseout event handler function 
+    function onMouseOut(d, i) {
+      // use the text label class to remove label on mouseout 
+      d3.select(this).attr('class', 'bar');
+      d3.select(this)
+      .transition() // adds animation
+      .duration(400)
+      .attr('width', x.bandwidth())
+      .attr("y", function(d) { return y(i.value); }) .attr("height", function(d) { return height - y(i.value); });
+      d3.selectAll('.val') .remove()
+    }
+</script>
 
 </body>
 
