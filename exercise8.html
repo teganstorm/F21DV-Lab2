@@ -1,11 +1,25 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+  <button> <a href="index.html">Back</a> </button>
+<script>
+	var div = d3.select('body')
+    .append("div")
+    .style('width', '400px') .style('height', '400px') .style('background-color', 'blue') 
+  
+  div.on("mouseover", function(event) {
+	    d3.select(this).transition().duration(1000) .style("background-color", "red")
+	    .transition().duration(2000).style("background-color", "green").style('width', '400px') .style('height', '400px');
+  })
+  div.on("mouseout", function(event) {
+	  d3.select(this).transition().duration(2000).style("background-color", "blue");
+  });
+</script>
+</body>
+
 </html>
