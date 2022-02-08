@@ -1,11 +1,39 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+  <div></div>
+  <script>
+    // make svg
+	var svg = d3.select("body")
+    .append("svg")
+    .attr("width", 800)
+    .attr("height", 800)
+    .style("border", "2px solid black")
+
+
+  var text = svg.append('text')
+    .attr("x", 0)
+    .attr("y", 13)
+    .text("(0,0)")
+
+  d3.selectAll(svg)
+    .on("mousemove", function(event) {
+	    var coordinates = d3.pointer(event);
+      var x = coordinates[0]
+      var y = coordinates[1]
+	    text.attr("x", x)
+      text.attr("y", y)
+      text.text("("+x+", "+y+")")
+
+    })
+
+  </script>
+</body>
+
 </html>
