@@ -1,11 +1,43 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+  <button> <a href="index.html">Back</a> </button>
+  <script>
+
+    // ease methods:
+    // - easeElastic
+    // - easeBounce
+    // - easeLinear
+    // - easeSin
+    // - easeQuad
+    // - easeCubic
+    // - easePoly
+    // - easeCircle
+    // - easeExp
+    // - easeBack
+    
+    d3.select('body')
+      .append("div") .style('width', '100px') .style('height', '100px')
+      .style('background-color', 'blue') .style('transform', 'scale(1.0)') .transition()
+      .ease( d3.easeBounce ) .duration(1000) .style("background-color", "red") .style('transform', 'scale(0.5)')
+
+    d3.select('body')
+      .append("div") .style('width', '100px') .style('height', '100px')
+      .style('background-color', 'blue') .style('transform', 'scale(1.0)') .transition()
+      .ease( d3.easeElastic ) .duration(1000) .style("background-color", "red") .style('transform', 'scale(0.5)')
+
+
+    d3.select('body')
+      .append("div") .style('width', '100px') .style('height', '100px')
+      .style('background-color', 'blue') .style('transform', 'scale(1.0)') .transition()
+      .ease( d3.easeLinear ) .duration(1000) .style("background-color", "red") .style('transform', 'scale(0.5)')
+  </script>
+
+</body>
+
 </html>
