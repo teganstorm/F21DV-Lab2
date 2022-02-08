@@ -31,7 +31,7 @@
     }
 
     
-    for (var i=0; i<7; i++) {
+    for (var i=0; i<5; i++) {
       random_width = getRandomInt(width)
       random_height = getRandomInt(height)
       console.log("Adding Element")
@@ -97,8 +97,9 @@
       element.remove();
       var extra = extras.pop(0);
     }
-    setInterval(addElement, 2000)
     setInterval(removeElement, 2000)
+    setInterval(addElement, 2000)
+    
 
 	</script>
 </body>
