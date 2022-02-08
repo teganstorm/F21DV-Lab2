@@ -1,11 +1,50 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+  <button> <a href="index.html">Back</a> </button>
+  <div></div>
+  <script>
+
+    // ease methods:
+    // - easeElastic
+    // - easeBounce
+    // - easeLinear
+    // - easeSin
+    // - easeQuad
+    // - easeCubic
+    // - easePoly
+    // - easeCircle
+    // - easeExp
+    // - easeBack
+    
+    // make text
+    var h2 = d3.select("body")
+      .append("h2")
+      .text("Hello World!")
+      .style("font-family", "Trebuchet MS")
+      .style("color", "blue")
+	    .style("font-size", "30px")
+      .on("mouseover", function(event) {
+				d3.select(this).transition()
+				.ease( d3.easeBounce )
+				.duration(1000)
+				.style("font-size", "70px")
+		    .style("color", "pink")
+      })
+      .on("mouseout", function(event) {
+        d3.select(this).transition()
+        .ease( d3.easeBounce )
+				.duration(1000)
+				.style("font-size", "30px")
+        .style("color", "blue")
+      })
+  </script>
+
+</body>
+
 </html>
