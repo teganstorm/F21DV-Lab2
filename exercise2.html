@@ -1,11 +1,76 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+  <style>
+    div {
+      position: relative;
+      background-color: yellow;
+      padding: 20px;
+      display: none;
+    }
+
+    span:hover+div {
+      position: absolute;
+      display: inline-block;
+      color: purple;
+    }
+		span:hover+div {
+      position: absolute;
+      display: inline-block;
+		}
+  </style>
+  <span>Hover over me!</span>
+  <div>I will show on hover</div>
+  <script>
+
+    var width = 800
+    var height = 800
+    var elements = []
+    var extras = []
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random()*max);
+    }
+
+    
+    for (var i=0; i<1; i++) {
+      var span = d3.select("body")
+        .append("span")
+        .style("position", "absolute")
+        .style("left", getRandomInt(width)+"px")
+        .style("top", getRandomInt(height)+"px")
+        .text("Hover Over Me!")
+      elements.push(span)
+    }
+
+    function addElement() {
+      console.log("Adding Element")
+      var span = d3.select("body")
+        .append("span") 
+        .style("position", "absolute")
+        .style("left", getRandomInt(width)+"px")
+        .style("top", getRandomInt(height)+"px")
+        .text("Hover Over Me!")
+      elements.push(span)
+    }
+
+    function removeElement() {
+      console.log("removeing Element")
+      var element = elements[0];
+      element.remove();
+    }
+
+    setInterval(addElement(), 4000)
+    setInterval(removeElement(), 4000)
+
+  </script>
+  <div>Div</div>
+</body>
+
 </html>
