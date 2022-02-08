@@ -1,11 +1,41 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+  <script>
+    d3.select('body')
+    .append('div')
+    .style('width', '100px') .style('height', '20px') .style('background-color', 'steelblue');
+    d3.selectAll("div") .on("mouseover", function(event){
+    d3.select(this) 
+      .style("background-color", "pink")
+	    .style("width", "250px")
+	    .style("border", "2px solid purple")
+      .style("height", "40px")
+      .text("Hello World!")
+      .style("color", "purple")
+      .style("font-size", "40px")
+    // Get current event info
+    // Note: d3.event (event) passed as the first argument to all listeners 
+    console.log(event);
+    // Get x & y co-ordinates
+    // Note: d3.mouse was removed in d3v6, you should use d3.pointer(event) 
+    console.log(d3.pointer(event));
+    })
+    .on("mouseout", function(){
+    d3.select(this) 
+      .style("background-color", "steelblue")
+      .style("border", "none")
+      .style("width", "100px")
+      .style("height", "20px")
+	    .text("")
+    }); 
+  </script>
+</body>
+
 </html>
