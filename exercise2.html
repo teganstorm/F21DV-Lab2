@@ -49,6 +49,7 @@
         .style("left", random_width+"px")
         .style("top", random_height+"px")
         .text("Hover Over Me!")
+      	.style("font-family", "Trebuchet MS")
       elements.push(span)
       var extra = d3.select("body")
         .append("div")
@@ -56,6 +57,7 @@
         .style("left", random_width+"px")
         .style("top", (random_height+20)+"px")
         .text("X: "+ random_width + ", Y: "+ random_height)
+      	.style("font-family", "Trebuchet MS")
       extras.push(extra)
     }
 
