@@ -1,11 +1,22 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+  <h1 style="font-family:Trebuchet MS">Type of returned function is: function</h1>
+  <p style="font-family:Trebuchet MS">Why? Because the variable intr </p>
+  <h1 style="font-family:Trebuchet MS"><a style="font-style:italic;color:blue">Array</a> (3)[ 16.2,34.4,5.2 ]</h1>
+  <p style="font-family:Trebuchet MS"></p>
+  <script>
+    let intr = d3.interpolate( [20, 40, 4], [1, 12, 10])
+    console.log("Type of returned function is: ", typeof (intr) );
+    console.log( intr(0.2) ) 
+  </script>
+
+</body>
+
 </html>
