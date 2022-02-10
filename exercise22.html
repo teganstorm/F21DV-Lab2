@@ -7,14 +7,14 @@
 
 <body>
 	<button> <a href="index.html">Back</a> </button>
-  <div></div>
-  <!-- Add buttons -->
-  <button onclick="update(data1, 'lightgreen')">Variable 1</button> 
-  <button onclick="update(data2, 'teal')">Variable 2</button>
-  <button onclick="update(data3, 'lightblue')">Variable 3</button>
-  <button onclick="update(data4, 'lavender')">Variable 4</button>
-  <script>
-      // create 2 data_set 
+	<div></div>
+	<!-- Add buttons -->
+	<button onclick="update(data1, 'lightgreen')">Variable 1</button>
+	<button onclick="update(data2, 'teal')">Variable 2</button>
+	<button onclick="update(data3, 'lightblue')">Variable 3</button>
+	<button onclick="update(data4, 'lavender')">Variable 4</button>
+	<script>
+		// create 2 data_set 
     const data1 = [
       {group: "A", value: 5}, {group: "B", value: 20}, {group: "C", value: 9}
     ];
@@ -29,7 +29,6 @@
     ];
     // set the dimensions and margins of the graph
     const margin = {top: 30, right: 30, bottom: 70, left: 60}; 
-    const svgwidth = 460 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
 
@@ -44,6 +43,12 @@
       var bar_width = 100;
       var width = no_bars * bar_width;
 
+      var max_value = 0
+      for (var i = 0; i< data.length; i++) {
+        if (data[i].value > max_value) {
+          max_value = data[i].value
+        }
+      }
 
 		// append the svg object to the body of the page
       var svg = d3.select('body')
@@ -73,7 +78,7 @@
 
       // Add Y axis
       var y = d3.scaleLinear()
-      .domain([0, 20])
+      .domain([0, max_value+2])
       .range([ height, 0]);
       svg.append("g")
       .attr("class", "myYaxis") .call(d3.axisLeft(y)).attr('class', 'yaxis');
@@ -117,7 +122,7 @@
         })
       
     }
-  </script>
+	</script>
 
 </body>
 
