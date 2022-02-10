@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+	<div></div>
+	<!-- Add buttons -->
+	<button onclick="update(data1, 'lightgreen')">Variable 1</button>
+	<button onclick="update(data2, 'teal')">Variable 2</button>
+  <div></div>
+	<script>
+		// create 2 data_set 
+    const data1 = [
+      {x: 1, y: 20}, {x: 4, y: 18}, {x: 9, y: 9}, {x: 20, y: 5}
+    ];
+    const data2 = [
+      {x: 3, y: 3}, {x: 10, y: 10}, {x: 20, y: 5}
+    ];
+    // set the dimensions and margins of the graph
+    const xSize = 600;
+    const ySize = 600;
+    const margin = 40;
+    const xMax = xSize - margin*2;
+    const yMax = ySize - margin*2;
+
+
+    // A function that create / update the plot for a given variable: 
+    function update(data, colour) {
+	    d3.selectAll('.line').remove()
+	    d3.selectAll('.xaxis').remove()
+      d3.selectAll('.yaxis').remove()
+      d3.selectAll('.svg').remove()
+
+      // Get the 'limits' of the data - the full extent (mins and max) // so the plotted data fits perfectly
+      const xExtent = d3.extent( data, d=>{ return d.x } );
+      const yExtent = d3.extent( data, d=>{ return d.y } );
+      
+      
+      // Append SVG Object to the Page const
+      svg = d3.select("body")
+      .append("svg").attr('class', 'svg')
+      .attr('width', xSize )
+      .attr('height', ySize )
+      .append("g")
+      .attr("transform","translate(" + margin + "," + margin + ")");
+      // X Axis
+      const x = d3.scaleLinear()
+      .domain([ xExtent[0], xExtent[1] ]) .range([0, xMax]);
+      // bottom
+      svg.append("g")
+      .attr("transform", "translate(0," + yMax + ")") .call(d3.axisBottom(x))
+      .attr('color', 'black').attr('class', 'xaxis');
+      // top
+      svg.append("g")
+      .call(d3.axisTop(x)).attr('class', 'xaxis');
+      // Y Axis
+      const y = d3.scaleLinear()
+      .domain([ yExtent[0], yExtent[1] ]) .range([ yMax, 0]);
+      // left y axis
+      svg.append("g")
+      .call(d3.axisLeft(y)).attr('class', 'yaxis');
+      // right y axis
+      svg.append("g")
+      .attr("transform", `translate(${yMax},0)`) .call(d3.axisRight(y)).attr('class', 'yaxis');;
+
+      // Add the line
+      var path = svg.append("path").attr('class', 'line')
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", colour)
+        .attr("stroke-width", 1.5)
+        .attr("d", d3.line()
+        .x(function(d) { return x(d.x) })
+        .y(function(d) { return y(d.y) })
+        );
+      
+    }
+	</script>
+
+</body>
+
+</html>
