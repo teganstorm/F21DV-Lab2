@@ -1,11 +1,124 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+  <div></div>
+  <!-- Add buttons -->
+  <button onclick="update(data1, 'lightgreen')">Variable 1</button> 
+  <button onclick="update(data2, 'teal')">Variable 2</button>
+  <button onclick="update(data3, 'lightblue')">Variable 3</button>
+  <button onclick="update(data4, 'lavender')">Variable 4</button>
+  <script>
+      // create 2 data_set 
+    const data1 = [
+      {group: "A", value: 5}, {group: "B", value: 20}, {group: "C", value: 9}
+    ];
+    const data2 = [
+      {group: "A", value: 10}, {group: "B", value: 2}, {group: "C", value: 18}
+    ];
+    const data3 = [
+      {group: "A", value: 15}, {group: "B", value: 10}, {group: "C", value: 1}
+    ];
+    const data4 = [
+      {group: "A", value: 15}, {group: "B", value: 10}, {group: "C", value: 1}, {group: "D", value: 11}
+    ];
+    // set the dimensions and margins of the graph
+    const margin = {top: 30, right: 30, bottom: 70, left: 60}; 
+    const svgwidth = 460 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+
+    // A function that create / update the plot for a given variable: 
+    function update(data, colour) {
+	    d3.selectAll('.bars').remove()
+	    d3.selectAll('.xaxis').remove()
+      d3.selectAll('.yaxis').remove()
+      d3.selectAll('.svg').remove()
+
+      var no_bars = data.length;
+      var bar_width = 100;
+      var width = no_bars * bar_width;
+
+
+		// append the svg object to the body of the page
+      var svg = d3.select('body')
+      .append('div') .append("svg") 
+      .attr('class', 'svg')
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+			// update svg width size because it may need to increase
+			svg.attr("width",10000)
+			svg.attr("height", height + margin.top + margin.bottom)
+
+	    // X axis
+	    var x = d3.scaleBand()
+      x.range([ 0, width])
+      .domain(data.map(function(d) {
+        return d.group;
+      })).padding(0.2)
+      svg.append("g")
+      .attr("transform", "translate(0," + height + ")") .call(d3.axisBottom(x))
+	    .attr('class', 'xaxis')
+      svg.append("g")
+      .attr("transform", "translate(0," + 0 + ")") .call(d3.axisTop(x))
+      .attr('class', 'xaxis')
+
+      // Add Y axis
+      var y = d3.scaleLinear()
+      .domain([0, 20])
+      .range([ height, 0]);
+      svg.append("g")
+      .attr("class", "myYaxis") .call(d3.axisLeft(y)).attr('class', 'yaxis');
+      svg.append("g")
+      .attr("transform", "translate("+width+"," + 0 + ")")
+      .call(d3.axisRight(y)).attr('class', 'yaxis');
+
+      var u = svg.selectAll("rect") 
+      .data(data)
+      u.enter() 
+      .append("rect") 
+	    .attr('class', 'bars')
+      .merge(u) 
+      .transition() 
+      .duration(1000)
+      .attr("x", function(d) { return x(d.group); })
+      .attr("y", function(d) { return y(d.value); }) 
+      .attr("width", x.bandwidth())
+      .attr("height", function(d) { return height - y(d.value); }) 
+      .attr("fill", function(d,i) {
+        return colour
+      })
+      // make the value appear over bar on hover:
+      d3.selectAll("rect")
+        .on("mouseover", function(d, i) {
+          svg.append("text")
+            .style("font-family", "Trebuchet MS")
+            .attr('class', 'val')
+            .attr('x', function() {
+              return x(i.group);
+            })
+            .attr('y', function() {
+              return y(i.value) - 5;
+            })
+            .text(function() {
+              return i.value;
+            })
+        })
+        .on("mouseout", function(d, i) {
+          d3.selectAll('.val').remove()
+        })
+      
+    }
+  </script>
+
+</body>
+
 </html>
