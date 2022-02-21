@@ -1,11 +1,38 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+	<script>
+    var date1 = new Date(2001, 06, 13);
+	  console.log("Date 1: "+date1.toString());
+    var date2 = new Date(2022, 02, 21);
+	  console.log("Date 2: "+date2.toString());
+    let inter = d3.interpolate(date1, date2) 
+    var result = inter(0.5);
+    console.log("Interpolated date: "+result.toString());
+	</script>
+	<p style="font-family:Trebuchet MS;"><a style="font-weight:bold">Method:</a> Define 2 dates, using JavaScript's build in Date(Day, Month, Year)
+		function, lets call them Date1 and Date2. Then initialize a new interpolate variable with Date1 and Date2, lets call
+		this function variable inter. Use the inter function with any parameter, but lets use 0.5 for this example, saving
+		it into a variable called result. Print the result. Code and output is shown below...</p>
+  <p style="font-family:Trebuchet MS; color:blue">var date1 = new Date(2001, 06, 13);</p>
+  <p style="font-family:Trebuchet MS; color:blue">console.log("Date 1: "+date1.toString());</p>
+	<h2 style="font-family:Trebuchet MS">Date 1: Fri Jul 13 2001 00:00:00 GMT+0400 (Gulf Standard Time)</h2>
+	<p style="font-family:Trebuchet MS; color:blue">var date2 = new Date(2022, 02, 21);</p>
+	<p style="font-family:Trebuchet MS; color:blue">console.log("Date 2: "+date2.toString());</p>
+	<h2 style="font-family:Trebuchet MS">Date 2: Mon Mar 21 2022 00:00:00 GMT+0400 (Gulf Standard Time)</h2>
+	<p style="font-family:Trebuchet MS; color:blue">let inter = d3.interpolate(date1, date2);</p>
+	<p style="font-family:Trebuchet MS; color:blue">var result = inter(0.5);</p>
+	<p style="font-family:Trebuchet MS; color:blue">console.log("Interpolated date: "+result.toString());</p>
+  <h2 style="font-family:Trebuchet MS">Interpolated date: Wed Nov 16 2011 00:00:00 GMT+0400 (Gulf Standard Time)</h2>
+
+  </p>
+
+</body>
+
 </html>
