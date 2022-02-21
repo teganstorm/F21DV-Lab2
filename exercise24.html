@@ -7,15 +7,15 @@
 
 <body>
 	<button> <a href="index.html">Back</a> </button>
-  <h1 style="font-family:Trebuchet MS">Type of returned function is: function</h1>
-  <p style="font-family:Trebuchet MS">Why? Because the variable intr </p>
-  <h1 style="font-family:Trebuchet MS"><a style="font-style:italic;color:blue">Array</a> (3)[ 16.2,34.4,5.2 ]</h1>
-  <p style="font-family:Trebuchet MS"></p>
-  <script>
-    let intr = d3.interpolate( [20, 40, 4], [1, 12, 10])
+	<h1 style="font-family:Trebuchet MS">Type of returned function is: function</h1>
+	<p style="font-family:Trebuchet MS">Why? Because the variable intr is a function called an interpolator, which has been given a starting value(s) and ending value(s). This function takes a parameter in the domain [0,1] lets call it x and returns the x point between the two start and end values the function was initiated with. (information from https://www.npmjs.com/package/d3-interpolate) </p>
+	<h1 style="font-family:Trebuchet MS"><a style="font-style:italic;color:blue">Array</a> (3)[ 16.2,34.4,5.2 ]</h1>
+	<p style="font-family:Trebuchet MS">Why? Because 20-((20-1)*0.2)=16.2, 40-((40-12)*0.2)=34.4 and 4-((4-10)*0.2)=5.2.  </p>
+	<script>
+		let intr = d3.interpolate( [20, 40, 4], [1, 12, 10])
     console.log("Type of returned function is: ", typeof (intr) );
     console.log( intr(0.2) ) 
-  </script>
+	</script>
 
 </body>
 
