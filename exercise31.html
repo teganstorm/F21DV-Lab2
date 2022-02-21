@@ -1,11 +1,81 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+	<div></div>
+	<script>
+		var width = 400, 
+      height = 400;
+
+    // setup svg 
+    d3.select('body')
+      .append('svg')
+      .attr('width',width)
+      .attr('height',height);
+
+    // generate some random data
+		var nodes = [{"radius": 20}, 
+                  {"radius": 20}, 
+                  {"radius": 20}, 
+                  {"radius": 20},
+                  {"radius": 30},
+                  {"radius": 30},
+									{"radius": 30},
+									{"radius": 30},
+                  {"radius": 10},
+                  {"radius": 10},
+                  {"radius": 10},
+                  {"radius": 10},
+									{"radius": 40},
+                  {"radius": 40},
+                  {"radius": 20}]
+    var numNodes = nodes.length;
+	  var colours = d3.scaleLinear().domain([1,numNodes]).range(["pink", "purple"]);
+    var simulation = d3.forceSimulation(nodes) 
+      .force('charge', d3.forceManyBody().strength(5)) 
+      .force('center', d3.forceCenter(width / 2, height / 2)) 
+      .force('collision', d3.forceCollide().radius(function(d) {
+        return d.radius 
+      }))
+      .on('tick', ticked);
+
+    var cur_colour; // used for exercise 31
+
+    function ticked() {
+    var u = d3.select('svg')
+      .selectAll('circle') 
+      .data(nodes) 
+      .join('circle') 
+      .attr('fill', function(d,i) {
+        return colours(i)
+      }) 
+      .attr('r', function(d) {
+        return d.radius 
+      })
+      .attr('cx', function(d) { 
+        return d.x
+      })
+      .attr('cy', function(d) {
+        return d.y 
+      })
+      .on("mouseover", function(event) {
+        var circle = d3.select(this)
+		    cur_colour = circle.attr("fill")
+		    circle.attr("fill", "orange")
+      })
+			.on("mouseout", function(event) {
+        var circle = d3.select(this)
+        circle.attr("fill", cur_colour)
+			})
+    } 
+    console.log('ready..'); 
+	</script>
+
+</body>
+
 </html>
