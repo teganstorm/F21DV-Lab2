@@ -1,11 +1,22 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  <head>
-    <script src='https://d3js.org/d3.v7.min.js'></script> 
-  </head>
-  <body>
-    <script>
-      // write your d3 code here..
-    </script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src='https://d3js.org/d3.v7.min.js'></script>
+</head>
+
+<body>
+	<button> <a href="index.html">Back</a> </button>
+	<script>
+    let cc = d3.interpolate('red', 'green') 
+    var inter = cc(0.5);
+	  d3.select("body").style("background-color", inter)
+    console.log(inter);
+	</script>
+	<h1 style="font-family:Trebuchet MS; color:white">Interpolated color value for the provided code: rgb(128, 64, 0)</h1>
+	<p style="font-family:Trebuchet MS; color:white">Why? Because 0.5 was parameter passed to the function which is the halfway/midpoint so the mid point colour between red and green is: rgb(128, 64, 0) which is this ugly brown colour displayed as the background.</p>
+	</p>
+
+</body>
+
 </html>
