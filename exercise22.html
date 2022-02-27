@@ -31,51 +31,37 @@
     const margin = {top: 30, right: 30, bottom: 70, left: 60}; 
     const height = 400 - margin.top - margin.bottom;
 
+    var no_bars = data1.length;
+    var bar_width = 100;
+    var width = no_bars * bar_width;
 
-    // A function that create / update the plot for a given variable: 
-    function update(data, colour) {
-	    d3.selectAll('.bars').remove()
-	    d3.selectAll('.xaxis').remove()
-      d3.selectAll('.yaxis').remove()
-      d3.selectAll('.svg').remove()
-
-      var no_bars = data.length;
-      var bar_width = 100;
-      var width = no_bars * bar_width;
-
-      var max_value = 0
-      for (var i = 0; i< data.length; i++) {
-        if (data[i].value > max_value) {
-          max_value = data[i].value
-        }
-      }
-
-		// append the svg object to the body of the page
+    		// append the svg object to the body of the page
       var svg = d3.select('body')
       .append('div') .append("svg") 
       .attr('class', 'svg')
-      .attr("width", width + margin.left + margin.right)
+      .attr("width", 10000)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-			// update svg width size because it may need to increase
-			svg.attr("width",10000)
-			svg.attr("height", height + margin.top + margin.bottom)
-
 	    // X axis
 	    var x = d3.scaleBand()
       x.range([ 0, width])
-      .domain(data.map(function(d) {
+      .domain(data1.map(function(d) {
         return d.group;
       })).padding(0.2)
       svg.append("g")
       .attr("transform", "translate(0," + height + ")") .call(d3.axisBottom(x))
-	    .attr('class', 'xaxis')
+	    .attr('class', 'xaxistop')
       svg.append("g")
       .attr("transform", "translate(0," + 0 + ")") .call(d3.axisTop(x))
-      .attr('class', 'xaxis')
+      .attr('class', 'xaxisbottom')
 
+      var max_value = 0
+      for (var i = 0; i< data1.length; i++) { if (data1[i].value> max_value) {
+        max_value = data1[i].value
+        }
+      }
       // Add Y axis
       var y = d3.scaleLinear()
       .domain([0, max_value+2])
@@ -84,7 +70,34 @@
       .attr("class", "myYaxis") .call(d3.axisLeft(y)).attr('class', 'yaxis');
       svg.append("g")
       .attr("transform", "translate("+width+"," + 0 + ")")
-      .call(d3.axisRight(y)).attr('class', 'yaxis');
+      .call(d3.axisRight(y)).attr('class', 'yaxisright');
+
+
+    // A function that create / update the plot for a given variable: 
+    function update(data, colour) {
+	    d3.selectAll('.bars').remove()
+
+      no_bars = data.length;
+      width = no_bars * bar_width;
+
+      max_value = 0
+      for (var i = 0; i< data.length; i++) {
+        if (data[i].value > max_value) {
+          max_value = data[i].value
+        }
+      }
+
+      var xaxistop = d3.selectAll(".xaxistop")
+      var xaxis = d3.selectAll(".xaxisbottom")
+	    x.range([ 0, width])
+      .domain(data.map(function(d) {
+      return d.group;
+      })).padding(0.2)
+      xaxis.transition().attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x)) 
+	    xaxistop.transition().attr("transform", "translate(0," + 0 + ")") .call(d3.axisTop(x))
+
+      var yaxis = d3.selectAll(".yaxisright")
+      yaxis.transition().attr("transform", "translate("+width+"," + 0 + ")").call(d3.axisRight(y))
 
       var u = svg.selectAll("rect") 
       .data(data)
