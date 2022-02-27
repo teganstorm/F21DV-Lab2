@@ -7,12 +7,12 @@
 
 <body>
 	<button> <a href="index.html">Back</a> </button>
-  <div></div>
-  <button onclick="update('apples')">Apples</button>
-  <button onclick="update('bananas')">Bananas</button>
-  <div></div>
-  <script>
-    var dataset = {
+	<div></div>
+	<button onclick="update('apples')">Apples</button>
+	<button onclick="update('bananas')">Bananas</button>
+	<div></div>
+	<script>
+		var dataset = {
       apples: [5345, 2879, 1997, 2437, 4045], 
 	    bananas: [1000, 2000, 3000, 2500, 1500]
     };
@@ -70,14 +70,14 @@
         .duration(1000)
         .attrTween("d", function (d,i) {
           var prevangle = prevdata[i]
-          var i = d3.interpolate(prevangle.endAngle, d.startAngle);
+          var i = d3.interpolate(prevangle.startAngle, d.startAngle);
           return function (t) {
             d.startAngle = i(t);
             return arc(d);
           }
         });
     }
-  </script>
+	</script>
 
 </body>
 
